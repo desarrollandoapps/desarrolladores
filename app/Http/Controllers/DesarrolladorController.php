@@ -16,8 +16,6 @@ class DesarrolladorController extends Controller
     public function index()
     {
         $desarrolladores = Desarrollador::all();
-
-        // Enviar a la vista
         return view('desarrolladores.index', compact('desarrolladores'));
     }
 
@@ -28,7 +26,8 @@ class DesarrolladorController extends Controller
      */
     public function create()
     {
-        $proyectos = Proyecto::orderBy('nombre', 'asc')->get();
+        $proyectos = Proyecto::orderBy('nombre', 'asc')
+                                ->get();
         return view('desarrolladores.insert', compact('proyectos'));
     }
 
@@ -40,9 +39,7 @@ class DesarrolladorController extends Controller
      */
     public function store(Request $request)
     {
-        
         Desarrollador::create($request->all());
-
         return redirect()->route('desarrolladores.index')->with('exito', '¡El registro se ha creado satisfactoriamente!');
     }
 
@@ -55,10 +52,12 @@ class DesarrolladorController extends Controller
     public function show($id)
     {
         $desarrollador = Desarrollador::join('proyectos', 'desarrolladors.proyecto_id', 'proyectos.id')
-                                        ->select('desarrolladors.id','desarrolladors.nombre',
-                                        'desarrolladors.apellido','desarrolladors.telefono',
-                                        'desarrolladors.direccion','proyectos.nombre as proyecto')
+                                        ->select('desarrolladors.id', 'desarrolladors.nombre', 
+                                        'desarrolladors.apellido', 'desarrolladors.telefono', 
+                                        'desarrolladors.direccion', 'proyectos.nombre as proyecto')
+                                        ->where('desarrolladors.id', $id)
                                         ->first();
+        //
         return view('desarrolladores.show', compact('desarrollador'));
     }
 
@@ -70,8 +69,11 @@ class DesarrolladorController extends Controller
      */
     public function edit($id)
     {
-        $proyectos = Proyecto::orderBy('nombre', 'asc')->get();
         $desarrollador = Desarrollador::findOrFail($id);
+        $proyectos = Proyecto::orderBy('nombre', 'asc')
+                                ->get();
+        
+        //
         return view('desarrolladores.edit', compact('desarrollador', 'proyectos'));
     }
 
@@ -86,7 +88,6 @@ class DesarrolladorController extends Controller
     {
         $desarrollador = Desarrollador::findOrFail($id);
         $desarrollador->update($request->all());
-
         return redirect()->route('desarrolladores.index')->with('exito', '¡El registro se ha modificado satisfactoriamente!');
     }
 

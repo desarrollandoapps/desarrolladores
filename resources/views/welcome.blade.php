@@ -15,7 +15,7 @@
             <img src="{{ asset('images/logo-sena.png') }}" alt="Logo SENA" class="logo">
         </header>
         <main class="px-3">
-            <h1 class="text-center">Proyectos de software</h1>
+            <h1>Proyectos de software</h1>
             <p class="fs-4 fw-lighter my-5">Sistema de información que permite gestionar los proyectos de software de una casa de desarrollo.</p>
             <a href="{{ route('proyectos.index') }}" class="btn btn-light btn-lg w-100">Ingresar</a>
         </main>

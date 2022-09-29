@@ -11,7 +11,7 @@
     @endif
     <div class="mt-3">
         <a href="{{ route('desarrolladores.create') }}" class="btn btn-secondary">
-            Crear nuevo Desarrollador
+            Crear nuevo desarrollador
         </a>
     </div>
     <div class="my-3">
@@ -54,7 +54,7 @@
             e.preventDefault();
             // Lanzar alerta de SweetAlert
             Swal.fire({
-                title: '¿Está seguro de eliminar el desarrollador?',
+                title: '¿Está seguro de eliminar el proyecto?',
                 text: "¡Esta acción no se podrá deshacer!",
                 icon: 'warning',
                 showCancelButton: true,

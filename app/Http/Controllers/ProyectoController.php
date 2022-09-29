@@ -12,10 +12,20 @@ class ProyectoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if($request)
+        {
+            $query = $request->buscar;
+            $proyectos = Proyecto::where('nombre', 'LIKE', '%' . $query . '%')
+                                    ->orderBy('nombre', 'asc')
+                                    ->paginate(5);
+            // 
+            return view('proyectos.index', compact('proyectos', 'query'));
+        }
         // Obtener todos los registros
-        $proyectos = Proyecto::all();
+        $proyectos = Proyecto::orderBy('nombre', 'asc')
+                                ->paginate(5);
 
         // Enviar a la vista
         return view('proyectos.index', compact('proyectos'));
